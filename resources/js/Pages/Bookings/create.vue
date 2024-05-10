@@ -19,6 +19,11 @@
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 v-model="form.name"
                             />
+
+                            <InputError
+                                class="mt-2"
+                                :message="form.errors.name"
+                            />
                         </div>
 
                         <div class="my-4">
@@ -31,6 +36,11 @@
                                 type="email"
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 v-model="form.email"
+                            />
+
+                            <InputError
+                                class="mt-2"
+                                :message="form.errors.email"
                             />
                         </div>
 
@@ -82,6 +92,34 @@
                             <p class="font-bold">{{ service.price }} €</p>
                         </div>
 
+                        <div class="my-4 flex justify-between">
+                            <div>
+                                <InputLabel
+                                    class="mb-1 block text-sm font-medium leading-6 text-gray-900"
+                                    value="Jour"
+                                />
+                                <input type="date" v-model="form.date" />
+
+                                <InputError
+                                    class="mt-2"
+                                    :message="form.errors.date"
+                                />
+                            </div>
+
+                            <div>
+                                <InputLabel
+                                    class="mb-1 block text-sm font-medium leading-6 text-gray-900"
+                                    value="Heure"
+                                />
+                                <input type="time" v-model="form.time" />
+
+                                <InputError
+                                    class="mt-2"
+                                    :message="form.errors.time"
+                                />
+                            </div>
+                        </div>
+
                         <div
                             class="mt-4 bg-gray-300 px-2 py-4 text-center rounded-lg"
                         >
@@ -110,6 +148,9 @@
                                         value="Interlocuteur"
                                     />
                                     <select v-model="service.employee_id">
+                                        <option value="0">
+                                            Sans préférence
+                                        </option>
                                         <option
                                             v-for="employee in props.employees"
                                             :key="employee.id"
@@ -128,6 +169,11 @@
                                 >
                             </p>
                         </div>
+                        
+                        <InputError
+                            class="mt-2"
+                            :message="form.errors.servicesChoosen"
+                        />
 
                         <div class="border-b border-black/10 pb-12"></div>
 
@@ -149,15 +195,18 @@
 import GuestLayout from "@/Layouts/GuestLayout.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
-import { Head, useForm } from "@inertiajs/vue3";
+import { Head, router, useForm } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { ref } from "vue";
+import InputError from "@/Components/InputError.vue";
 
 const form = useForm({
     name: "",
     email: "",
     servicesChoosen: [],
     price: 0,
+    date: "",
+    time: "",
 });
 
 const filteredServices = ref([]);
@@ -166,7 +215,7 @@ const chooseYourType = ref();
 
 const props = defineProps({
     services: Array,
-    employees: Array
+    employees: Array,
 });
 
 const filterServices = (type) => {
@@ -201,6 +250,8 @@ const removeService = (serviceId) => {
 
 // Lancement d'une requête POST avec les données de l'objet form
 const submit = () => {
-    form.post("/admin/services");
+    form.post("/bookings", {
+        onFinish: () => router.get("/booking/confirmation"),
+    });
 };
 </script>
