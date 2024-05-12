@@ -78,6 +78,8 @@ class BookingController extends Controller
         return to_route('booking.confirmation');
     }
 
+
+
     public function confirmation()
     {
         return Inertia::render('Bookings/confirmation');
