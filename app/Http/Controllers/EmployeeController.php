@@ -30,8 +30,6 @@ class EmployeeController extends Controller
 
     public function store(Request $request)
     {
-        // return $request->all();
-
         // Création d'employés
         $employe = User::create([
             'name' => $request->name,
@@ -46,7 +44,7 @@ class EmployeeController extends Controller
 
     public function edit(Request $request)
     {
-        $employe = Employee::find($request->employe);
+        $employe = User::find($request->employe);
 
         $services = Service::where('type', $employe->type)->get();
 
@@ -61,7 +59,7 @@ class EmployeeController extends Controller
 
     public function update(Request $request)
     {
-        $employe = Employee::find($request->employe);
+        $employe = User::find($request->employe);
 
         // Supprimer la liste des services de cet employé
         $employe->services()->detach();
@@ -77,7 +75,7 @@ class EmployeeController extends Controller
 
     public function destroy(Request $request)
     {
-        $employee = Employee::find($request->employe);
+        $employee = User::find($request->employe);
 
         // Supprimer la liste des services de cet employé
         $employee->services()->detach();
