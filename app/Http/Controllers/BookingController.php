@@ -74,6 +74,8 @@ class BookingController extends Controller
 
         // Etape 3 : envoi du mail de confirmation
         Mail::to($request->email)->send(new BookingConfirmation());
+
+        return to_route('booking.confirmation');
     }
 
     public function confirmation()
