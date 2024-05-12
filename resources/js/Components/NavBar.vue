@@ -13,7 +13,9 @@
             </DisclosureButton>
           </div>
           <div class="flex align-items flex-shrink-0 items-center">
-            <img class="h-28 w-auto" src="/logo1.png" alt="Your Company" />
+            <a href="/">
+                <img class="h-28 w-auto" src="/logo1.png" alt="Your Company" />
+            </a>
           </div>
           <div class="hidden md:ml-6 md:flex md:space-x-8">
             <!-- Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
@@ -22,6 +24,7 @@
             <a href="/gallerie" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-white hover:border-gray-300 hover:text-gray-700">Gallerie</a>
             <a href="/staff" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-white hover:border-gray-300 hover:text-gray-700">Notre équipe</a>
             <a href="/contact" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-white hover:border-gray-300 hover:text-gray-700">Contact</a>
+            <a href="/admin/bookings" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-white hover:border-gray-300 hover:text-gray-700">Admin</a>
           </div>
         </div>
         <div class="flex items-center">
